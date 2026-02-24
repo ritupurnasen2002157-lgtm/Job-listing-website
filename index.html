@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobFinder | Discover Your Next Career Opportunity</title>
+    <meta name="description"
+        content="Find your dream job with our modern job listing platform. Search, filter, and apply to thousands of job opportunities across various industries and locations.">
+    <meta name="keywords" content="jobs, career, employment, job search, hiring, recruitment">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="min-h-screen bg-neutral-50">
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-briefcase text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-neutral-900">Job<span class="text-primary-600">Finder</span></h1>
+                </div>
+
+                <nav id="main-nav" class="w-full md:w-auto">
+                    <ul class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6"></ul>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <button id="saved-jobs-btn" class="px-4 py-2 text-primary-600 hover:text-primary-700 font-medium">
+                        <i class="far fa-bookmark mr-2"></i>
+                        <span id="saved-count">0</span> Saved
+                    </button>
+                    <button
+                        class="px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium">
+                        Post a Job
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">Find Your <span
+                        class="text-primary-600">Dream Job</span></h2>
+                <p class="text-lg text-neutral-700 mb-8">Discover thousands of job opportunities from top companies
+                    worldwide. Filter by location, category, and experience level.</p>
+
+                <!-- Search Bar -->
+                <div class="bg-white rounded-xl shadow-lg p-4 md:p-6 mb-8">
+                    <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                        <div class="flex-1">
+                            <input type="text" id="keyword-search"
+                                class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                placeholder="Search by job title, company, or keyword">
+                        </div>
+                        <div class="flex-1">
+                            <input type="text" id="location-search"
+                                class="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                placeholder="Location (e.g., Remote, New York)">
+                        </div>
+                        <button id="search-btn"
+                            class="px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium">
+                            <i class="fas fa-search mr-2"></i>Search Jobs
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Filters & Job Listings -->
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <aside class="lg:w-1/4">
+                <div class="bg-white rounded-xl shadow-sm p-6 sticky top-32">
+                    <h3 class="text-xl font-bold text-neutral-900 mb-6">Filter Jobs</h3>
+
+                    <!-- Category Filter -->
+                    <div class="mb-8">
+                        <h4 class="font-semibold text-neutral-800 mb-4">Category</h4>
+                        <div id="category-filters" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Experience Filter -->
+                    <div class="mb-8">
+                        <h4 class="font-semibold text-neutral-800 mb-4">Experience Level</h4>
+                        <div id="experience-filters" class="space-y-2"></div>
+                    </div>
+
+                    <!-- Location Filter -->
+                    <div class="mb-8">
+                        <h4 class="font-semibold text-neutral-800 mb-4">Location Type</h4>
+                        <div id="location-filters" class="space-y-2"></div>
+                    </div>
+
+                    <button id="clear-filters"
+                        class="w-full py-3 text-neutral-600 hover:text-neutral-800 border border-neutral-300 rounded-lg hover:border-neutral-400 transition font-medium">
+                        Clear All Filters
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Job Listings -->
+            <section class="lg:w-3/4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-neutral-900">
+                        <span id="job-count">0</span> Jobs Found
+                    </h3>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-neutral-700">Sort by:</span>
+                        <select id="sort-by"
+                            class="px-3 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            <option value="recent">Most Recent</option>
+                            <option value="salary-high">Salary (High to Low)</option>
+                            <option value="salary-low">Salary (Low to High)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Job Cards Container -->
+                <div id="job-listings" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12"></div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center space-x-2 mb-12"></div>
+
+                <!-- No Results Message -->
+                <div id="no-results" class="hidden text-center py-16">
+                    <i class="fas fa-search text-neutral-300 text-6xl mb-4"></i>
+                    <h4 class="text-2xl font-bold text-neutral-700 mb-2">No jobs found</h4>
+                    <p class="text-neutral-600 mb-6">Try adjusting your filters or search terms</p>
+                    <button id="reset-search"
+                        class="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium">
+                        Reset Filters
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-briefcase text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">JobFinder</h3>
+                    </div>
+                    <p class="text-neutral-400">Connecting talented professionals with amazing opportunities worldwide.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">For Job Seekers</h4>
+                    <ul id="jobseeker-links" class="space-y-2 text-neutral-400"></ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">For Employers</h4>
+                    <ul id="employer-links" class="space-y-2 text-neutral-400"></ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Newsletter</h4>
+                    <p class="text-neutral-400 mb-4">Get the latest job updates directly in your inbox.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email"
+                            class="flex-1 px-4 py-2 rounded-l-lg text-neutral-900">
+                        <button class="px-4 py-2 bg-primary-600 hover:bg-primary-700 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-neutral-800 text-center text-neutral-400">
+                <p>&copy; 2026 JobFinder. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Job Details Modal -->
+    <div id="job-modal" class="modal">
+        <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 id="modal-title" class="text-3xl font-bold text-neutral-900 mb-2"></h3>
+                        <div id="modal-company" class="text-xl text-neutral-700 mb-4"></div>
+                    </div>
+                    <button id="close-modal" class="text-neutral-500 hover:text-neutral-700 text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-neutral-50 p-4 rounded-lg">
+                        <div class="text-neutral-600 mb-1">Location</div>
+                        <div id="modal-location" class="font-semibold text-neutral-900"></div>
+                    </div>
+                    <div class="bg-neutral-50 p-4 rounded-lg">
+                        <div class="text-neutral-600 mb-1">Experience</div>
+                        <div id="modal-experience" class="font-semibold text-neutral-900"></div>
+                    </div>
+                    <div class="bg-neutral-50 p-4 rounded-lg">
+                        <div class="text-neutral-600 mb-1">Salary</div>
+                        <div id="modal-salary" class="font-semibold text-neutral-900"></div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-neutral-900 mb-4">Job Description</h4>
+                    <div id="modal-description" class="text-neutral-700 leading-relaxed"></div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-neutral-900 mb-4">Requirements</h4>
+                    <ul id="modal-requirements" class="list-disc pl-5 space-y-2 text-neutral-700"></ul>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <button id="save-job-modal"
+                        class="px-6 py-3 border-2 border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition font-medium">
+                        <i class="far fa-bookmark mr-2"></i>Save Job
+                    </button>
+                    <button
+                        class="px-8 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition font-medium">
+                        Apply Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
